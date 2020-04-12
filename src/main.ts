@@ -1,8 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import * as mongoose from 'mongoose';
 
 async function bootstrap() {
+  mongoose.connect('mongodb://localhost:27017/woffee_nest', {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  });
   const app = await NestFactory.create(AppModule);
 
   //生成swagger文档

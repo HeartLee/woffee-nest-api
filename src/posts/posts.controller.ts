@@ -9,6 +9,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiProperty } from '@nestjs/swagger';
+import { PostModel } from './post.model';
 
 class CreatePostDto {
   //Dto 数据传输对象
@@ -23,8 +24,8 @@ class CreatePostDto {
 export class PostsController {
   @Get('/')
   @ApiOperation({ summary: '博客列表' })
-  index() {
-    return [{ id: 1 }];
+  async index() {
+    return await PostModel.find();
   }
   @Post()
   @ApiOperation({ summary: '创建帖子' })
